@@ -1,8 +1,8 @@
 package scheduler
 
 import (
-	"4pd.io/k8s-vgpu/pkg/k8sutil"
-	"4pd.io/k8s-vgpu/pkg/util"
+	//"4pd.io/k8s-vgpu/pkg/k8sutil"
+	//"4pd.io/k8s-vgpu/pkg/util"
 	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/client-go/informers"
 	"k8s.io/client-go/tools/cache"
