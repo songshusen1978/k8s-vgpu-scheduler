@@ -12,11 +12,10 @@ import (
 func (s *Scheduler) StartMecScheduler(informerFactory informers.SharedInformerFactory) {
 	informer := informerFactory.Apps().V1().Deployments().Informer()
 	informer.AddEventHandler(cache.ResourceEventHandlerFuncs{
-		AddFunc:    s.onAddDeployment,
+		AddFunc: s.onAddDeployment,
 	})
 	informerFactory.Start(s.stopCh)
 }
-
 
 func (s *Scheduler) onAddDeployment(obj interface{}) {
 	dep, ok := obj.(*appsv1.Deployment)
@@ -25,24 +24,26 @@ func (s *Scheduler) onAddDeployment(obj interface{}) {
 		return
 	}
 	//node name and annotaions
-	if dep.Spec.Template.Spec.NodeName  == ""{
+	if dep.Spec.Template.Spec.NodeName == "" {
 		klog.Infof("node name set")
 		return
 	}
 
+	/*
 
-	nodeID, ok := pod.Annotations[util.AssignedNodeAnnotations]
-	if !ok {
-		return
-	}
-	ids, ok := pod.Annotations[util.AssignedIDsAnnotations]
-	if !ok {
-		return
-	}
-	if k8sutil.IsPodInTerminatedState(pod) {
-		s.delPod(pod)
-		return
-	}
-	podDev := util.DecodePodDevices(ids)
-	s.addPod(pod, nodeID, podDev)
+		nodeID, ok := pod.Annotations[util.AssignedNodeAnnotations]
+		if !ok {
+			return
+		}
+		ids, ok := pod.Annotations[util.AssignedIDsAnnotations]
+		if !ok {
+			return
+		}
+		if k8sutil.IsPodInTerminatedState(pod) {
+			s.delPod(pod)
+			return
+		}
+		podDev := util.DecodePodDevices(ids)
+		s.addPod(pod, nodeID, podDev)
+	*/
 }
